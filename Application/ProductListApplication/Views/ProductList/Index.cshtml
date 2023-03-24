@@ -3,9 +3,15 @@
     ViewData["Title"] = "Product List";
 }
 
-@foreach (var product in Model.Products)
+@for (var i = 0; i < Model.Products.Count; i++)
 {
-    <div class="text-center">
-        <p>@product.Name</p>
+    var product = Model.Products[i];
+    <div id="Product @i" class="card">
+        <h3 class="card-title ">@product.Name</h3>
+        @if (!string.IsNullOrEmpty(product.Description))
+        {
+            <span class="card-body">@product.Description</span>
+        }
+        <span class="card-footer text-end">£@product.Price</span>
     </div>
 }
