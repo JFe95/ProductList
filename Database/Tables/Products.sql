@@ -1,10 +1,10 @@
 Use ProductList
 
-If Not Exists (Select 1 From sys.objects Where object_id = OBJECT_ID(N'dbo.Product') AND type in (N'U'))
+If Not Exists (Select 1 From sys.objects Where object_id = OBJECT_ID(N'dbo.Products') AND type in (N'U'))
 
-Create Table dbo.Product
+Create Table dbo.Products
 (
-	ProductID				int				Identity(1,1)	Not Null,
+	ProductId				int				Identity(1,1)	Not Null,
 	[Name]					nvarchar(100)					Not Null,
 	[Description]			nvarchar(1000)					Null,
 	Price					decimal(18,2)					Not Null,
@@ -12,7 +12,7 @@ Create Table dbo.Product
 
 	Constraint PKProduct Primary Key Clustered 
 		(
-			ProductID asc
+			ProductId asc
 		)With (Ignore_Dup_Key = Off) 
 )
 
