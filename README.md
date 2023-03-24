@@ -18,24 +18,36 @@ Tasks
 
 Task 1: build a product database and a page to display a list of products. Products should
 contain the following information:
+
 ● Name
+
 ● Description
+
 ● Price
+
 ● Priority
+
 Products should be displayed in alphabetical order by name. Products which are marked as
 priority should be displayed first.
 
 Task 2: products are displayed on an external site so need a URL. However, we want to track
 the number of clicks on each product. Modify the product table to include the following:
+
 ● URL
+
 ● ViewCount
+
 For the purposes of this test use example.com as the URL for all products.
 When a user clicks on a product the ViewCount should be incremented and the user should be
 taken to the external site. The ViewCount should be displayed next to the product.
 
 Task 3: products need to be sortable by the following criteria:
+
 ● Default (the existing sort order from task 1)
+
 ● ViewCount
+
 ● Price
+
 Modify the page to allow the user to sort by these methods and display the newly sorted
 products as appropriate.
