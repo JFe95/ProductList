@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs
+/Services/ProductListService/.vs
+/Services/ProductListService/ProductListService/obj
