@@ -2,28 +2,38 @@
 using ProductListApplication.Models;
 using ProductListApplication.Services;
 using System.Diagnostics;
-using ProductListService.Entities;
 
 namespace ProductListApplication.Controllers
 {
     public class ProductListController : Controller
     {
         private readonly ILogger<ProductListController> _logger;
-        private ProductListViewModel viewModel = new() { Products = ProductService.GetProductsAsync().GetAwaiter().GetResult() };
+        private ProductListViewModel _viewModel;
 
         public ProductListController(ILogger<ProductListController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder = "Default")
         {
-            return View(viewModel);
+            _viewModel = new ProductListViewModel { Products = ProductService.GetProductsAsync().GetAwaiter().GetResult() };
+            _viewModel.Products = sortOrder switch
+            {
+                "Price" => _viewModel.Products.OrderBy(product => product.Price).ToList(),
+                "ViewCount" => _viewModel.Products.OrderByDescending(product => product.ViewCount).ToList(),
+                "Default" => _viewModel.Products.OrderByDescending(product => product.Priority).ThenBy(product => product.Name).ToList(),
+                _ => throw new ArgumentException(nameof(sortOrder), sortOrder, null)
+            };
+            _viewModel.SelectedItem = sortOrder;
+
+            return View(_viewModel);
         }
 
         public IActionResult LinkClicked(int productId)
         {
-            var product = viewModel.Products.First(p => p.ProductId == productId);
+            _viewModel = new ProductListViewModel { Products = ProductService.GetProductsAsync().GetAwaiter().GetResult() };
+            var product = _viewModel.Products.First(p => p.ProductId == productId);
 
             if (string.IsNullOrEmpty(product.Url))
                 return new EmptyResult();
