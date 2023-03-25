@@ -1,6 +1,4 @@
-﻿
-using ProductListService.Entities;
-using System.Collections.Generic;
+﻿using ProductListService.Entities;
 using System.Net.Http.Headers;
 
 namespace ProductListApplication.Services
@@ -22,6 +20,14 @@ namespace ProductListApplication.Services
                 products = await response.Content.ReadFromJsonAsync<List<Product>>();
 
             return products;
+        }
+
+        public static async Task ProductClickedAsync(Product product)
+        {
+            _client.DefaultRequestHeaders.Accept.Clear();
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var response = await _client.PutAsJsonAsync($"{BaseAddress}/updateviewcount/{product.ProductId}", product);
+            response.EnsureSuccessStatusCode();
         }
     }
 }
