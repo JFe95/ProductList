@@ -20,10 +20,7 @@ public class ProductController : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     public async Task<IActionResult> ProductsAsync()
     {
-        var itemsOnPage = await _productContext.Products
-            .OrderByDescending(product => product.Priority).ThenBy(product => product.Name)
-            .ToListAsync();
-
+        var itemsOnPage = await _productContext.Products.ToListAsync();
         return Ok(itemsOnPage);
     }
 
@@ -37,7 +34,6 @@ public class ProductController : ControllerBase
             return BadRequest();
 
         _productContext.Entry(product).State = EntityState.Modified;
-
         await _productContext.SaveChangesAsync();
 
         return NoContent();
