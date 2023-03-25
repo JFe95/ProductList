@@ -1,5 +1,4 @@
-﻿@using ProductListApplication.Controllers
-@model ProductListViewModel
+﻿@model ProductListViewModel
 @{
     ViewData["Title"] = "Product List";
 }
@@ -7,12 +6,29 @@
 @for (var i = 0; i < Model.Products.Count; i++)
 {
     var product = Model.Products[i];
-    <a id="Product @i" class="card" href="@Url.Action("LinkClicked", "ProductList", new{productId = product.ProductId})">
+    <a id="product @i" class="card" onclick="incrementCount(@i)" href="@Url.Action("LinkClicked", "ProductList", new{productId = product.ProductId})">
         <h3 class="card-title">@product.Name</h3>
         @if (!string.IsNullOrEmpty(product.Description))
         {
             <span class="card-body">@product.Description</span>
         }
-        <span class="card-footer text-end">£@product.Price</span>
+        <div class="card-footer">
+            <div class="row" >
+                <div class="col-sm-6 text-start text-muted">
+                    <span>Views: </span>
+                    <span id="viewCount @i"> @product.ViewCount</span>
+                </div>
+                <span class="col-sm-6 text-end">£@product.Price</span>
+            </div>
+        </div>
     </a>
+    
 }
+<script>
+    function incrementCount(i) {
+        var count = document.getElementById('viewCount ' + i);
+        var number = count.innerHTML;
+        number++;
+        count.innerHTML = number;
+    }
+</script>

@@ -34,20 +34,11 @@ public class ProductController : ControllerBase
     public async Task<IActionResult> LinkClickedAsync(int productId, [FromBody]Product product)
     {
         if (productId != product.ProductId)
-        {
             return BadRequest();
-        }
 
         _productContext.Entry(product).State = EntityState.Modified;
-        try
-        {
-            await _productContext.SaveChangesAsync();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.Message);
-            throw;
-        }
+
+        await _productContext.SaveChangesAsync();
 
         return NoContent();
     }
