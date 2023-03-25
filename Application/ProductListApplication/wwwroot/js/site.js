@@ -7,3 +7,7 @@ function incrementViewCount(i) {
     number++;
     count.innerHTML = number;
 }
+
+function dropDownOnChange(val) {
+    window.location.href = "/ProductList/Index?sortOrder=" + val;
+}

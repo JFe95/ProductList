@@ -2,7 +2,9 @@
 @{
     ViewData["Title"] = "Product List";
 }
-
+<div class="text-end">
+    <span class="col-sm-6">Sort By: </span> @Html.DropDownListFor(model => model.SelectedItem, new SelectList(Model.SortListItems, "Value", "Text"), new{ @id = "sortListDropDown", @onchange="dropDownOnChange(this.value)" })
+</div>
 @for (var i = 0; i < Model.Products.Count; i++)
 {
     var product = Model.Products[i];
@@ -22,5 +24,4 @@
             </div>
         </div>
     </a>
-    
 }
