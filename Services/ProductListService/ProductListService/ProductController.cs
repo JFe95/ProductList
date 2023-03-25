@@ -31,7 +31,7 @@ public class ProductController : ControllerBase
     [Route("updateviewcount/{productId}")]
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    public async Task<IActionResult> LinkClickedAsync(int productId, Product product)
+    public async Task<IActionResult> LinkClickedAsync(int productId, [FromBody]Product product)
     {
         if (productId != product.ProductId)
         {
@@ -39,8 +39,15 @@ public class ProductController : ControllerBase
         }
 
         _productContext.Entry(product).State = EntityState.Modified;
-
-        await _productContext.SaveChangesAsync();
+        try
+        {
+            await _productContext.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            throw;
+        }
 
         return NoContent();
     }
