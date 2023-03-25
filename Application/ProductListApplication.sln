@@ -7,6 +7,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductListApplication", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductListService", "..\Services\ProductListService\ProductListService\ProductListService.csproj", "{77F16803-A12C-4975-B9C0-ABAA7382ED29}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{03EC94F2-CE36-4742-9501-19B6510A18A8}"
+	ProjectSection(SolutionItems) = preProject
+		..\Database\CreateDatabase.sql = ..\Database\CreateDatabase.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tables", "Tables", "{5EA221E6-7927-47D6-A64C-C3A6BAA6F9CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Create", "Create", "{477582F4-A7C6-4579-A2BA-382F44047BC1}"
+	ProjectSection(SolutionItems) = preProject
+		..\Database\Tables\Create\Products.sql = ..\Database\Tables\Create\Products.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Update", "Update", "{848BD7B9-BBDF-499D-807D-9A4EBD139230}"
+	ProjectSection(SolutionItems) = preProject
+		..\Database\Tables\Update\20230324UpdateProducts.sql = ..\Database\Tables\Update\20230324UpdateProducts.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +40,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5EA221E6-7927-47D6-A64C-C3A6BAA6F9CF} = {03EC94F2-CE36-4742-9501-19B6510A18A8}
+		{477582F4-A7C6-4579-A2BA-382F44047BC1} = {5EA221E6-7927-47D6-A64C-C3A6BAA6F9CF}
+		{848BD7B9-BBDF-499D-807D-9A4EBD139230} = {5EA221E6-7927-47D6-A64C-C3A6BAA6F9CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50D85901-74DB-4358-BF3F-35C0DBD4F390}

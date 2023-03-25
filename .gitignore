@@ -9,3 +9,5 @@
 /Application/.vs
 /Application/ProductListApplication/bin/Debug/net6.0
 /Application/ProductListApplication/obj
+/Services/ProductListService/ProductListService/Properties/serviceDependencies.local.json.user
+/Services/ProductListService/ProductListService/Properties/serviceDependencies.local.json
