@@ -17,15 +17,29 @@ public class ProductController : ControllerBase
     [HttpGet]
     [Route("productlist")]
     [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
     public async Task<IActionResult> ProductsAsync()
     {
-
-        int i = 0;
         var itemsOnPage = await _productContext.Products
             .OrderByDescending(product => product.Priority).ThenBy(product => product.Name)
             .ToListAsync();
 
         return Ok(itemsOnPage);
+    }
+
+    [HttpPut]
+    [Route("updateviewcount/{productId}")]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+    public async Task<IActionResult> LinkClickedAsync(int productId, [FromBody]Product product)
+    {
+        if (productId != product.ProductId)
+            return BadRequest();
+
+        _productContext.Entry(product).State = EntityState.Modified;
+
+        await _productContext.SaveChangesAsync();
+
+        return NoContent();
     }
 }
